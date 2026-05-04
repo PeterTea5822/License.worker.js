@@ -42,31 +42,24 @@ Fork 本仓库，然后在 GitHub repo **Settings > Secrets and variables > Acti
 node scripts/generate-secrets.mjs
 ```
 
-`DATABASE_ID` / `DATABASE_ID_PREVIEW` **无需手动设置** — 首次部署时 workflow 会自动创建 D1 数据库并保存 ID。
+`DATABASE_ID` 需手动创建后填入。首次部署会自动执行 D1 迁移。
 
-### 2. Push to Deploy / 推送即部署
+### 2. Deploy / 部署
 
-**Push to `main`** → 生产部署 / Production deploy
+**方式 A — Tag 推荐：**
 
-首次部署会自动：创建 D1 数据库 → 执行迁移 → 注入 Secrets → 部署 Worker。
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+**方式 B — 手动触发：**
+
+GitHub repo → Actions → Deploy → Run workflow
 
 ### 3. 访问管理面板 / Access Dashboard
 
 部署后访问 `https://<your-worker>.workers.dev/admin`。
-
----
-
-### Optional: Preview Deploy / 可选：预览部署
-
-默认不启用。如需在 PR 时自动部署预览环境：
-
-1. 在 GitHub repo **Settings > Variables > Actions** 中添加 `ENABLE_PREVIEW`，值设为 `true`
-2. 之后每个 Pull Request 将自动部署一个独立的预览 Worker
-
-Preview disabled by default. To enable PR preview deployments:
-
-1. Add variable `ENABLE_PREVIEW` = `true` in **Settings > Variables > Actions**
-2. Each Pull Request will auto-deploy a preview Worker
 
 ---
 
@@ -201,22 +194,13 @@ Dashboard: `http://127.0.0.1:8787/admin`
 
 **Settings > Secrets and variables > Actions > Secrets**
 
-| Secret | Required | Auto-created | Description |
-|--------|----------|-------------|-------------|
-| `CLOUDFLARE_API_TOKEN` | Yes | No | Cloudflare API Token |
-| `CLOUDFLARE_ACCOUNT_ID` | Yes | No | Cloudflare Account ID |
-| `DATABASE_ID` | No | Yes | 生产 D1 数据库 ID |
-| `SIGNING_PRIVATE_KEY_PKCS8_B64` | Yes | No | Ed25519 私钥 |
-| `SIGNING_PUBLIC_KEY_SPKI_B64` | Yes | No | Ed25519 公钥 |
-| `DATABASE_ID_PREVIEW` | No | Yes | 预览 D1 数据库 ID (启用预览后自动创建) |
-
-## GitHub Variables / GitHub 变量
-
-**Settings > Secrets and variables > Actions > Variables**
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `ENABLE_PREVIEW` | No | 设为 `true` 启用 PR 预览部署 |
+| Secret | Required | Description |
+|--------|----------|-------------|
+| `CLOUDFLARE_API_TOKEN` | Yes | Cloudflare API Token |
+| `CLOUDFLARE_ACCOUNT_ID` | Yes | Cloudflare Account ID |
+| `DATABASE_ID` | Yes | D1 数据库 ID |
+| `SIGNING_PRIVATE_KEY_PKCS8_B64` | Yes | Ed25519 私钥 |
+| `SIGNING_PUBLIC_KEY_SPKI_B64` | Yes | Ed25519 公钥 |
 
 ---
 
