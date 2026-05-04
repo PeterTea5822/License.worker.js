@@ -60,12 +60,12 @@ node scripts/generate-secrets.mjs
 
 默认不启用。如需在 PR 时自动部署预览环境：
 
-1. 在 GitHub repo Secrets 中添加 `ENABLE_PREVIEW`，值设为 `true`
+1. 在 GitHub repo **Settings > Variables > Actions** 中添加 `ENABLE_PREVIEW`，值设为 `true`
 2. 之后每个 Pull Request 将自动部署一个独立的预览 Worker
 
 Preview disabled by default. To enable PR preview deployments:
 
-1. Add secret `ENABLE_PREVIEW` = `true` in your repo Secrets
+1. Add variable `ENABLE_PREVIEW` = `true` in **Settings > Variables > Actions**
 2. Each Pull Request will auto-deploy a preview Worker
 
 ---
@@ -197,7 +197,9 @@ Dashboard: `http://127.0.0.1:8787/admin`
 
 ---
 
-## GitHub Secrets Reference / GitHub Secrets 参考
+## GitHub Secrets / GitHub 密钥
+
+**Settings > Secrets and variables > Actions > Secrets**
 
 | Secret | Required | Auto-created | Description |
 |--------|----------|-------------|-------------|
@@ -206,8 +208,15 @@ Dashboard: `http://127.0.0.1:8787/admin`
 | `DATABASE_ID` | No | Yes | 生产 D1 数据库 ID |
 | `SIGNING_PRIVATE_KEY_PKCS8_B64` | Yes | No | Ed25519 私钥 |
 | `SIGNING_PUBLIC_KEY_SPKI_B64` | Yes | No | Ed25519 公钥 |
-| `ENABLE_PREVIEW` | No | No | 设为 `true` 启用 PR 预览部署 |
 | `DATABASE_ID_PREVIEW` | No | Yes | 预览 D1 数据库 ID (启用预览后自动创建) |
+
+## GitHub Variables / GitHub 变量
+
+**Settings > Secrets and variables > Actions > Variables**
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ENABLE_PREVIEW` | No | 设为 `true` 启用 PR 预览部署 |
 
 ---
 
