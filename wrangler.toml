@@ -1,0 +1,14 @@
+name = "license-worker-js"
+main = "src/index.ts"
+compatibility_date = "2026-04-25"
+
+[vars]
+API_VERSION = "v1"
+NONCE_WINDOW_SECONDS = "300"
+PUBLIC_KEY_ID = "main-ed25519-1"
+
+[[d1_databases]]
+binding = "LICENSE_DB"
+database_name = "license-worker-db"
+database_id = "local-dev-placeholder-replace-in-ci"
+migrations_dir = "migrations"

@@ -1,0 +1,20 @@
+{
+  "name": "license-worker-js",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.21.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "secrets:generate": "node scripts/generate-secrets.mjs",
+    "db:migrate:local": "wrangler d1 migrations apply LICENSE_DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply LICENSE_DB --remote"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260425.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.85.0"
+  }
+}
